@@ -17,12 +17,13 @@
        under the License.
  */
 
-package com.example.sdkplugin;
+package com.example.pluginapp;
 
+import android.app.Activity;
 import android.os.Bundle;
 import org.apache.cordova.*;
 
-public class MainActivity extends CordovaActivity
+public class MainActivity extends Activity
 {
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -36,6 +37,6 @@ public class MainActivity extends CordovaActivity
         }
 
         // Set by <content src="index.html" /> in config.xml
-        loadUrl(launchUrl);
+      //  loadUrl(launchUrl);
     }
 }

@@ -37,6 +37,8 @@ import android.view.WindowManager;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 
+import com.coocaa.plugin.support.activity.PluginActivity;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -74,7 +76,7 @@ import java.util.Locale;
  * deprecated in favor of the config.xml file.
  *
  */
-public class CordovaActivity extends Activity {
+public class CordovaActivity extends PluginActivity {
     public static String TAG = "CordovaActivity";
 
     // The webview for our app
@@ -234,7 +236,7 @@ public class CordovaActivity extends Activity {
      * Called when the system is about to start resuming a previous activity.
      */
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         LOG.d(TAG, "Paused the activity.");
 
@@ -250,7 +252,7 @@ public class CordovaActivity extends Activity {
      * Called when the activity receives a new intent
      */
     @Override
-    protected void onNewIntent(Intent intent) {
+    public void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         //Forward to plugins
         if (this.appView != null)
@@ -261,7 +263,7 @@ public class CordovaActivity extends Activity {
      * Called when the activity will start interacting with the user.
      */
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         LOG.d(TAG, "Resumed the activity.");
 
@@ -279,7 +281,7 @@ public class CordovaActivity extends Activity {
      * Called when the activity is no longer visible to the user.
      */
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         LOG.d(TAG, "Stopped the activity.");
 
@@ -293,7 +295,7 @@ public class CordovaActivity extends Activity {
      * Called when the activity is becoming visible to the user.
      */
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         LOG.d(TAG, "Started the activity.");
 

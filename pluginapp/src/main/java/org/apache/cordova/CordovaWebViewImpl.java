@@ -22,6 +22,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -74,6 +75,8 @@ public class CordovaWebViewImpl implements CordovaWebView {
     private Set<Integer> boundKeyCodes = new HashSet<Integer>();
 
     public static CordovaWebViewEngine createEngine(Context context, CordovaPreferences preferences) {
+        Log.i("TEST","SystemWebViewEngine.class.getCanonicalName() = " + SystemWebViewEngine.class.getCanonicalName());
+        Log.i("TEST","preferences = " + preferences);
         String className = preferences.getString("webview", SystemWebViewEngine.class.getCanonicalName());
         try {
             Class<?> webViewClass = Class.forName(className);

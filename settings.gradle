@@ -1,3 +1,6 @@
 include ':hostapp'
 // GENERATED FILE - DO NOT EDIT
 include ":pluginapp"
+
+if (new File("AB_PluginSDK/cc_settings.gradle").exists())
+    apply from: "AB_PluginSDK/cc_settings.gradle"
