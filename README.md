@@ -1,0 +1,4 @@
+# CoocaaOSWebViewSDK-Plugin
+尝试将CoocaaOSWebviewSDK以插件Apk的形式提供给宿主Apk使用
+
+需要依赖xuzexiao的PluginSDK，代码路径在gogs上，具体用法参见其README
