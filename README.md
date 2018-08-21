@@ -4,4 +4,4 @@
 
 * 依赖xuzexiao的PluginSDK，release/v2.0分支，代码路径在gogs上，具体用法参见其README
 
-* 如果是宿主Apk接收回调消息，宿主Apk和插件Apk需要依赖自定义的LibCommon Java Library
+* 如果宿主Apk接收回调消息，宿主Apk和插件Apk需要依赖自定义的LibCommon Java Library
