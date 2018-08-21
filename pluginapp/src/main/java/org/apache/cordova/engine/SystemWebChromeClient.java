@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -278,6 +279,13 @@ public class SystemWebChromeClient extends WebChromeClient {
             filePathsCallback.onReceiveValue(null);
         }
         return true;
+    }
+
+    @Override
+    public void onProgressChanged(WebView view, int newProgress) {
+        Log.i("TEST","onProgress bb = " + newProgress);
+//        super.onProgressChanged(view, newProgress);
+        parentEngine.client.onProgressChanged(newProgress);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)

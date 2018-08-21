@@ -70,4 +70,5 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: '*.jar')
     provided project(':PluginSDK')
+    provided project(':libCommon')
 }

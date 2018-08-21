@@ -10,6 +10,8 @@ import com.coocaa.plugin.manager.loadparams.PluginParamsHelper;
 import com.coocaa.plugin.plugindata.PluginData;
 import com.coocaa.plugin.support.LaunchHelper;
 
+import coocaa.libcommon.WebBridge;
+
 public class MainActivity extends Activity {
 
     @Override
@@ -17,19 +19,45 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         String filePath = "/data/app/com.example.pluginapp-1.apk";
-        String dexDir = this.getFilesDir().getAbsolutePath() ;
-        Log.i("TEST","dexDir = " + dexDir);
-        PluginParams params = PluginParamsHelper.createApkPluginParams(filePath, dexDir, null);
+        String dexDir = this.getFilesDir().getAbsolutePath();
+        Log.i("TEST", "dexDir = " + dexDir);
+        // 未安裝apk
+//        PluginParams params = PluginParamsHelper.createApkPluginParams(filePath, dexDir, null);
+//        PluginData pluginData = PluginManager.getInstance().loadPlugin(params, this);
+
+        // 已安裝apk
+        PluginParams params = PluginParamsHelper.createAppPluginParams("com.example.pluginapp");
         PluginData pluginData = PluginManager.getInstance().loadPlugin(params, this);
 
-        Log.i("TEST","pluginData = " + pluginData);
+        WebBridge.IWebPageListener listener = new WebBridge.IWebPageListener() {
+            @Override
+            public void onPageStarted(String url) {
+                Log.i("TEST","host onPageStarted url = " + url);
+            }
+
+            @Override
+            public void onPageFinished(String url) {
+                Log.i("TEST","host onPageFinished url = " + url);
+            }
+
+            @Override
+            public void onProgressChanged(int newValue) {
+                Log.i("TEST","host onProgressChanged value = " + newValue);
+            }
+        };
+
+        WebBridge.IWebPlugin plugin = (WebBridge.IWebPlugin) pluginData.getClassInstance("com.example.pluginapp.PluginImpl");
+        plugin.setListener(listener);
+
+        Log.i("TEST", "pluginData = " + pluginData);
 
         String pluginClassName = "com.example.pluginapp.WebXActivity";
 
         Bundle bundle = new Bundle();
-        bundle.putInt("test",123);
-        bundle.putString("url","https://www.baidu.com");
-        LaunchHelper.launchActivity(this, pluginClassName, pluginData,null,bundle);
+        bundle.putString("url", "https://www.sina.com");
+        LaunchHelper.launchActivity(this, pluginClassName, pluginData, null, bundle);
+
+
 //        String url = "https://www.baidu.com";
 //        loadUrl(url);
     }

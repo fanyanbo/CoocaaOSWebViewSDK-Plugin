@@ -54,7 +54,8 @@ public class ConfigXmlParser {
         int id = action.getResources().getIdentifier("config", "xml", action.getClass().getPackage().getName());
         if (id == 0) {
             // If we couldn't find config.xml there, we'll look in the namespace from AndroidManifest.xml
-            id = action.getResources().getIdentifier("config", "xml", action.getPackageName());
+//            id = action.getResources().getIdentifier("config", "xml", action.getPackageName());
+            id = action.getResources().getIdentifier("config", "xml", "com.example.pluginapp");
             if (id == 0) {
                 LOG.e(TAG, "res/xml/config.xml is missing!");
                 return;

@@ -37,6 +37,7 @@ public class MainActivity extends Activity
         }
 
         // Set by <content src="index.html" /> in config.xml
-      //  loadUrl(launchUrl);
+        String launchUrl = "http://www.baidu.com";
+//        loadUrl(launchUrl);
     }
 }

@@ -26,6 +26,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
+import android.util.Log;
 import android.webkit.ClientCertRequest;
 import android.webkit.HttpAuthHandler;
 import android.webkit.SslErrorHandler;
@@ -138,6 +139,7 @@ public class SystemWebViewClient extends WebViewClient {
      */
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
+        Log.i("TEST","onPageStart url = " + url);
         super.onPageStarted(view, url, favicon);
         isCurrentlyLoading = true;
         // Flush stale messages & reset plugins.
@@ -155,6 +157,7 @@ public class SystemWebViewClient extends WebViewClient {
      */
     @Override
     public void onPageFinished(WebView view, String url) {
+        Log.i("TEST","onPageFinished url = " + url);
         super.onPageFinished(view, url);
         // Ignore excessive calls, if url is not about:blank (CB-8317).
         if (!isCurrentlyLoading && !url.startsWith("about:")) {
@@ -187,6 +190,7 @@ public class SystemWebViewClient extends WebViewClient {
      */
     @Override
     public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+        Log.i("TEST","onReceivedError url = " + failingUrl + ",description = " + description +",errorCode = " + errorCode);
         // Ignore error due to stopLoading().
         if (!isCurrentlyLoading) {
             return;

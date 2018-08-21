@@ -1,4 +1,4 @@
-include ':hostapp'
+include ':hostapp', ':libCommon'
 // GENERATED FILE - DO NOT EDIT
 include ":pluginapp"
 

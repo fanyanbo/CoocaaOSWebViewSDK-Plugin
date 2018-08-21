@@ -24,10 +24,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,6 +40,7 @@ import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 
 import com.coocaa.plugin.support.activity.PluginActivity;
+import com.example.pluginapp.PluginImpl;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -142,6 +145,61 @@ public class CordovaActivity extends PluginActivity {
         if (savedInstanceState != null) {
             cordovaInterface.restoreInstanceState(savedInstanceState);
         }
+        cordovaInterface.setCordovaInterfaceListener(new CordovaInterfaceImpl.CordovaInterfaceListener() {
+            @Override
+            public void onPageStarted(String url) {
+                Log.i("TEST","fyb==>onPageStarted url = " + url);
+                PluginImpl.getListener().onPageStarted(url);
+            }
+
+            @Override
+            public void onPageExit() {
+
+            }
+
+            @Override
+            public void onPageLoadingFinished(String url) {
+                Log.i("TEST","fyb==>onPageLoadingFinished url = " + url);
+                PluginImpl.getListener().onPageFinished(url);
+            }
+
+            @Override
+            public void onReceivedError(int errorCode, String description, String failingUrl) {
+
+            }
+
+            @Override
+            public void doUpdateVisitedHistory(String url, boolean isReload) {
+
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(String url) {
+                return false;
+            }
+
+            @Override
+            public void onReceivedTitle(String title) {
+
+            }
+
+            @Override
+            public void onReceivedIcon(Bitmap icon) {
+
+            }
+
+            @Override
+            public void onProgressChanged(int process) {
+                Log.i("TEST","fyb==>onProgressChanged process = " + process);
+                PluginImpl.getListener().onProgressChanged(process);
+            }
+
+            @Override
+            public void onReceivedSslError(int errorCode, String failingUrl) {
+
+            }
+        });
+
     }
 
     protected void init() {
@@ -162,7 +220,7 @@ public class CordovaActivity extends PluginActivity {
     @SuppressWarnings("deprecation")
     protected void loadConfig() {
         ConfigXmlParser parser = new ConfigXmlParser();
-        parser.parse(this);
+        parser.parse(getPluginContext());
         preferences = parser.getPreferences();
         preferences.setPreferencesBundle(getIntent().getExtras());
         launchUrl = parser.getLaunchUrl();
@@ -205,17 +263,18 @@ public class CordovaActivity extends PluginActivity {
     }
 
     protected CordovaWebViewEngine makeWebViewEngine() {
-        return CordovaWebViewImpl.createEngine(this, preferences);
+        return CordovaWebViewImpl.createEngine(getPluginContext(), preferences);
     }
 
     protected CordovaInterfaceImpl makeCordovaInterface() {
-        return new CordovaInterfaceImpl(this) {
-            @Override
-            public Object onMessage(String id, Object data) {
-                // Plumb this to CordovaActivity.onMessage for backwards compatibility
-                return CordovaActivity.this.onMessage(id, data);
-            }
-        };
+        return new CordovaInterfaceImpl(this);
+//        {
+//            @Override
+//            public Object onMessage(String id, Object data) {
+//                // Plumb this to CordovaActivity.onMessage for backwards compatibility
+//                return CordovaActivity.this.onMessage(id, data);
+//            }
+//        };
     }
 
     /**

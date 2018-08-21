@@ -100,7 +100,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/transforms" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
-      <excludeFolder url="file://$MODULE_DIR$/build/reports" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 28 Platform" jdkType="Android SDK" />
@@ -149,6 +148,7 @@
     <orderEntry type="library" name="Gradle: com.android.support:customview-28.0.0-rc01" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-vector-drawable-28.0.0-rc01" level="project" />
     <orderEntry type="module" module-name="PluginSDK" />
+    <orderEntry type="module" module-name="libCommon" />
     <orderEntry type="library" name="Gradle: android-android-28" level="project" />
   </component>
 </module>

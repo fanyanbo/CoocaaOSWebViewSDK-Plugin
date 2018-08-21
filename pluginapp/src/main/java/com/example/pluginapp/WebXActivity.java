@@ -16,7 +16,7 @@ public class WebXActivity extends CordovaActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("TEST","onCreate 0817");
+        Log.i("TEST","onCreate");
     }
 
     @Override
@@ -24,9 +24,8 @@ public class WebXActivity extends CordovaActivity {
         super.onStart();
         Log.i("TEST","onStart");
 
-        int value = getIntent().getExtras().getInt("test");
         String url = getIntent().getExtras().getString("url");
-        Log.i("TEST","onStart getParams value = " + value + "url = " + url);
+        Log.i("TEST","onStart getParams url = " + url);
         loadUrl(url);
     }
 

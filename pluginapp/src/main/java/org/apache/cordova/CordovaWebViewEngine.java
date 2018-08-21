@@ -18,6 +18,7 @@
 */
 package org.apache.cordova;
 
+import android.graphics.Bitmap;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.ValueCallback;
@@ -81,5 +82,10 @@ public interface CordovaWebViewEngine {
         void onReceivedError(int errorCode, String description, String failingUrl);
         void onPageFinishedLoading(String url);
         boolean onNavigationAttempt(String url);
+        void onReceivedTitle(String title);
+        void onReceivedIcon(Bitmap icon);
+        void onProgressChanged(int newProcess);
+        void doUpdateVisitedHistory(String url,boolean isReload);
+        void onReceivedSslError(int errorCode, String failingUrl);
     }
 }

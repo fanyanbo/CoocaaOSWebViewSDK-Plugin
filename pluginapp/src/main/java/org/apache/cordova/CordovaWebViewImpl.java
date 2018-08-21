@@ -21,6 +21,7 @@ package org.apache.cordova;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.util.Log;
 import android.view.Gravity;
@@ -77,7 +78,8 @@ public class CordovaWebViewImpl implements CordovaWebView {
     public static CordovaWebViewEngine createEngine(Context context, CordovaPreferences preferences) {
         Log.i("TEST","SystemWebViewEngine.class.getCanonicalName() = " + SystemWebViewEngine.class.getCanonicalName());
         Log.i("TEST","preferences = " + preferences);
-        String className = preferences.getString("webview", SystemWebViewEngine.class.getCanonicalName());
+//        String className = preferences.getString("webview", SystemWebViewEngine.class.getCanonicalName());
+        String className = "org.apache.cordova.engine.SystemWebViewEngine";
         try {
             Class<?> webViewClass = Class.forName(className);
             Constructor<?> constructor = webViewClass.getConstructor(Context.class, CordovaPreferences.class);
@@ -193,6 +195,7 @@ public class CordovaWebViewImpl implements CordovaWebView {
                 if (loadUrlTimeoutValue > 0) {
                     cordova.getThreadPool().execute(timeoutCheck);
                 }
+                Log.i("TEST","1111 url " + url);
                 engine.loadUrl(url, _recreatePlugins);
             }
         });
@@ -614,6 +617,32 @@ public class CordovaWebViewImpl implements CordovaWebView {
             }
             LOG.w(TAG, "Blocked (possibly sub-frame) navigation to non-allowed URL: " + url);
             return true;
+        }
+
+        @Override
+        public void onReceivedTitle(String title) {
+
+        }
+
+        @Override
+        public void onReceivedIcon(Bitmap icon) {
+
+        }
+
+        @Override
+        public void onProgressChanged(int newProcess) {
+            Log.i("TEST","CordovaWebViewImpl process = " + newProcess);
+            pluginManager.postMessage("onProgressChanged",newProcess);
+        }
+
+        @Override
+        public void doUpdateVisitedHistory(String url, boolean isReload) {
+
+        }
+
+        @Override
+        public void onReceivedSslError(int errorCode, String failingUrl) {
+
         }
     }
 }
